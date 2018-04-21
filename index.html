@@ -1,0 +1,150 @@
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<title>Story Archive</title>
+	<script>
+		var currentPage = 1;
+		var maxPage = 7;
+		var minPage = 1;
+		window.onload = function () {
+			document.getElementById("show_header").style.display = "none";
+			document.getElementById("menu").style.display = "none";
+		}
+
+		function navbar(state) {
+			// Use classes?
+			if (state == "show") {
+				document.getElementById("header").style.top = "";
+				document.getElementById("content").style.paddingTop = "105px";
+				document.getElementById("show_header").style.display = "none";
+			} else if (state == "hide") {
+				document.getElementById("header").style.top = "-170px";
+				document.getElementById("content").style.paddingTop = "0";
+				document.getElementById("show_header").style.display = "";
+			}
+		}
+
+		function open_menu() {
+			document.getElementById("header").style.top = "-170px";
+			document.getElementById("show_header").style.display = "none";
+			document.getElementById("content").style.display = "none";
+			document.getElementById("menu").style.display = "";
+			switchMenu();
+		}
+		function select_story(story, title) {
+			document.getElementById("content").innerHTML = `<object id="newcontent" type="text/html" data="${file}"> </object>`;
+			document.getElementById("title").innerHTML = title;
+			document.getElementById("menu").style.display = "none";
+			hideSubMenus();
+			navbar("hide");
+			document.getElementById("content").style.display = "";
+		}
+
+		function hideSubMenus() {
+			//Use Pop/Push stack?
+			for (var i = 1; i <= maxPage; i++) {
+				document.getElementById("menu-p" + i).style.display = "none";
+			}
+		}
+
+		function switchMenu() {
+			hideSubMenus();
+			document.getElementById("menu-p" + currentPage).style.display = "";
+		}
+
+		function switch_page(direction) {
+			if (direction == "next") {
+				if (!(currentPage == maxPage)) {
+					currentPage += 1;
+					switchMenu();
+					console.log(`Page: ${currentPage}`);
+				}
+			} else if (direction == "previous") {
+				if (!(currentPage == minPage)) {
+					currentPage -= 1;
+					switchMenu();
+					console.log(`Page: ${currentPage}`);
+				}
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<div id="menu" class="menu">
+		<div id="menu-buttons">
+			<button id="to-front" onclick="currentPage = minPage; switchMenu();">
+				<-</button>
+					<button id="previous-page" onclick="switch_page('previous')">Previous</button>
+					<button id="next-page" onclick="switch_page('next')">Next</button>
+					<button id="to-back" onclick="currentPage = maxPage; switchMenu();">-></button>
+		</div>
+		<!-- https://www.textfixer.com/tools/alphabetical-order.php 
+		 - Disable Remove HTML 
+		 - Input&Output Line Break
+		-->
+		<!-- <div id="menu-example" class="menu">
+			<button class="button_story" onclick="select_story('stories/x.html', '@')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+		</div> -->
+		<div id="menu-p1" class="menu">
+			<button class="button_story" onclick="select_story('stories/21sept2016.html', '21 September 2016')">21 September 2016</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+		</div>
+		<div id="menu-p2" class="menu">
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+			<button class="button_story" onclick="select_story('stories/x.html', 'x')">x</button>
+		</div>
+	</div>
+
+	<div id="header" class="flex-container">
+		<button id="menu-button" onclick="open_menu()">三</button>
+		<h3 id="title">Story Archive</h3>
+		<button id="hide_header" onclick="navbar('hide')">-</button>
+	</div>
+	<div id="button_wrapper">
+		<button id="show_header" onclick="navbar('show')">|</button>
+	</div>
+	<div id="content"></div>
+</body>
+
+</html>
